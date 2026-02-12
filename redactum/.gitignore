@@ -6,3 +6,5 @@ dist/
 *.tgz
 .env.local
 .env.*.local
+
+PROMPTS.md
