@@ -1,0 +1,37 @@
+{
+  "name": "redactum",
+  "version": "1.0.0",
+  "description": "AI-powered writing enhancement tool",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "redactum": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "ai",
+    "writing",
+    "grammar",
+    "tone",
+    "cli",
+    "terminal"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ink": "^4.4.1",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "openai": "^4.28.0",
+    "clipboardy": "^4.0.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}
