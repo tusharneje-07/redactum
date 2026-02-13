@@ -17,16 +17,16 @@ AI-powered writing enhancement tool for the terminal. Transform your text with i
 cd redactum
 
 # Install dependencies
-bun install --legacy-peer-deps
+npm install --legacy-peer-deps
 
 # Build the application
-bun run build
+npm run build
 
 # Run locally
-bun start
+npm start
 
 # Or link globally
-bun link
+npm link
 redactum
 ```
 
@@ -149,13 +149,13 @@ redactum/
 
 ```bash
 # Development mode (auto-rebuild on changes)
-bun run dev
+npm run dev
 
 # Build once
-bun run build
+npm run build
 
 # Run built version
-bun start
+npm start
 ```
 
 ## Credits
