@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redactum - AI Text Refinement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glow-purple {
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+        }
+        
+        .hero-text {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .line-animate {
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+            height: 1px;
+            animation: lineMove 3s linear infinite;
+        }
+        
+        @keyframes lineMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-8 py-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-violet-500 rounded-xl flex items-center justify-center">
+                    <span class="text-xl font-bold">R</span>
+                </div>
+                <span class="text-xl font-semibold">Redactum</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="/app" class="px-6 py-2.5 bg-violet-500 hover:bg-violet-600 rounded-full transition-all">
+                    Launch App
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Content -->
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    AI-Powered Text Refinement
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl font-bold leading-tight hero-text">
+                    Perfect Your<br>Writing Today
+                </h1>
+                
+                <p class="text-gray-400 text-lg leading-relaxed max-w-lg">
+                    Transform your text with intelligent AI refinement. Choose from 10 professional tones, 
+                    eliminate grammar errors, and improve clarity while avoiding AI detection.
+                </p>
+                
+                <div class="flex gap-4">
+                    <a href="/app" class="px-8 py-4 bg-violet-500 hover:bg-violet-600 rounded-full font-medium transition-all flex items-center gap-2">
+                        Get Started
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <button onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})" 
+                            class="px-8 py-4 glass-card hover:bg-white/5 rounded-full font-medium transition-all">
+                        Learn More
+                    </button>
+                </div>
+                
+                <!-- Stats -->
+                <div class="flex gap-12 pt-8">
+                    <div>
+                        <div class="text-3xl font-bold">10</div>
+                        <div class="text-gray-500 text-sm">Professional Tones</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold">16</div>
+                        <div class="text-gray-500 text-sm">Quality Rules</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold">9</div>
+                        <div class="text-gray-500 text-sm">AI Providers</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Content - Floating Cards -->
+            <div class="relative h-[600px] hidden lg:block">
+                <!-- Card 1 -->
+                <div class="absolute top-0 right-0 w-80 glass-card rounded-2xl p-6 float-animation glow-purple">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-violet-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-wand-magic-sparkles text-violet-400"></i>
+                        </div>
+                        <span class="font-medium">AI Refinement</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Smart text improvement with grammar correction and tone adjustment</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="absolute top-40 left-0 w-72 glass-card rounded-2xl p-6 float-animation" style="animation-delay: 1s;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-halved text-blue-400"></i>
+                        </div>
+                        <span class="font-medium">Anti-Detection</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">16 quality rules to avoid AI writing red flags</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="absolute bottom-20 right-10 w-80 glass-card rounded-2xl p-6 float-animation" style="animation-delay: 2s;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-pink-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-palette text-pink-400"></i>
+                        </div>
+                        <span class="font-medium">10 Tones</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Formal</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Professional</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-xs">Casual</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-xs">+7 more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold mb-4">Powerful Features</h2>
+                <p class="text-gray-400">Everything you need to perfect your writing</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-violet-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-wand-magic-sparkles text-2xl text-violet-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI Refinement</h3>
+                    <p class="text-gray-400">Intelligent text improvement with grammar correction and structural enhancements</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-layer-group text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">10 Tones</h3>
+                    <p class="text-gray-400">From Formal to Casual, choose the perfect tone for your audience</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-halved text-2xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Anti-Detection</h3>
+                    <p class="text-gray-400">16 quality rules eliminate AI writing patterns and buzzwords</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-pink-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-2xl text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Multiple Providers</h3>
+                    <p class="text-gray-400">Support for 9 AI providers including OpenAI, Groq, Anthropic</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-orange-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-copy text-2xl text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">One-Click Copy</h3>
+                    <p class="text-gray-400">Instantly copy refined text to your clipboard</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-2xl p-8 hover:bg-white/5 transition-all">
+                    <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-moon text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Dark & Light</h3>
+                    <p class="text-gray-400">Choose your preferred theme for comfortable writing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32">
+        <div class="max-w-4xl mx-auto px-8 text-center">
+            <div class="glass-card rounded-3xl p-16 glow-purple">
+                <h2 class="text-4xl font-bold mb-6">Ready to Perfect Your Writing?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                    Join thousands of professionals who use Redactum to enhance their communication 
+                    with AI-powered refinement.
+                </p>
+                <a href="/app" class="inline-flex items-center gap-2 px-8 py-4 bg-violet-500 hover:bg-violet-600 rounded-full font-medium transition-all">
+                    Start Writing
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-violet-500 rounded-lg flex items-center justify-center">
+                    <span class="font-bold">R</span>
+                </div>
+                <span class="font-medium">Redactum</span>
+            </div>
+            <p class="text-gray-500 text-sm">© 2025 Redactum. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
