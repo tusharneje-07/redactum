@@ -85,13 +85,20 @@ def save_settings(settings):
     with open(SETTINGS_FILE, 'w') as f:
         json.dump(settings, f, indent=2)
 
-def create_refinement_prompt(text, tone_id, tone_instruction):
-    """Create the AI prompt with quality rules"""
+def create_refinement_prompt(text, tone_id, tone_instruction, custom_instructions=None):
+    """Create the AI prompt with quality rules and optional custom instructions"""
+    custom_section = ""
+    if custom_instructions:
+        custom_section = f"""
+CUSTOM INSTRUCTIONS:
+{custom_instructions}
+"""
+    
     return f"""You are a professional editor and writing coach. Your task is to refine the following text according to specific requirements.
 
 TONE REQUIREMENT:
 {tone_instruction}
-
+{custom_section}
 QUALITY CONTROL RULES:
 {QUALITY_RULES}
 
@@ -236,6 +243,7 @@ def refine_text():
     data = request.json
     text = data.get('text', '').strip()
     tone_id = data.get('tone', 'professional')
+    custom_instructions = data.get('customInstructions', '').strip()
     
     if not text:
         return jsonify({'error': 'Please enter some text to refine'}), 400
@@ -251,8 +259,13 @@ def refine_text():
     if not provider:
         return jsonify({'error': f'No API key configured for {settings["activeProvider"]}. Please configure in settings.'}), 400
     
-    # Create prompt
-    prompt = create_refinement_prompt(text, tone_id, tone['instruction'])
+    # Create prompt with optional custom instructions
+    prompt = create_refinement_prompt(
+        text, 
+        tone_id, 
+        tone['instruction'],
+        custom_instructions if custom_instructions else None
+    )
     
     try:
         refined_text = provider.generate_completion(prompt, 0.4)

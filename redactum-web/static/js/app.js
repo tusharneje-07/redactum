@@ -181,6 +181,7 @@ class RedactumApp {
 
     async refineText() {
         const inputText = document.getElementById('inputText').value.trim();
+        const customInstructions = document.getElementById('customInstructions').value.trim();
         
         if (!inputText) {
             this.showToast('Please enter some text to refine', 'error');
@@ -190,15 +191,22 @@ class RedactumApp {
         this.showLoading(true);
 
         try {
+            const requestBody = {
+                text: inputText,
+                tone: this.selectedTone
+            };
+
+            // Add custom instructions if provided
+            if (customInstructions) {
+                requestBody.customInstructions = customInstructions;
+            }
+
             const response = await fetch('/api/refine', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    text: inputText,
-                    tone: this.selectedTone
-                })
+                body: JSON.stringify(requestBody)
             });
 
             const data = await response.json();
@@ -254,6 +262,7 @@ class RedactumApp {
 
     reset() {
         document.getElementById('inputText').value = '';
+        document.getElementById('customInstructions').value = '';
         document.getElementById('inputCharCount').textContent = '0 characters';
         document.getElementById('outputCharCount').textContent = '0 characters';
         document.getElementById('outputContent').classList.add('hidden');
