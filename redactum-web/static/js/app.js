@@ -51,6 +51,11 @@ class RedactumApp {
         }
     }
 
+    // Expose settings to other UI code that may need them
+    getSettings() {
+        return this.settings;
+    }
+
     async loadProviders() {
         try {
             const response = await fetch('/api/providers');
@@ -199,6 +204,15 @@ class RedactumApp {
             // Add custom instructions if provided
             if (customInstructions) {
                 requestBody.customInstructions = customInstructions;
+            }
+
+            // Include humanizeLevel and debug settings from loaded settings so the backend
+            // can apply the deterministic post-processing. Defaults handled server-side.
+            if (this.settings && this.settings.humanizeLevel) {
+                requestBody.humanizeLevel = this.settings.humanizeLevel;
+            }
+            if (this.settings && typeof this.settings.debug !== 'undefined') {
+                requestBody.debug = this.settings.debug;
             }
 
             const response = await fetch('/api/refine', {

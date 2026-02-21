@@ -1,0 +1,53 @@
+[
+  {
+    "recommendation": "Apply controlled contractions",
+    "rationale": "Contractions make text sound more conversational and human; applying a deterministic fraction avoids overuse.",
+    "params": {"low_pct": 10, "standard_pct": 30, "aggressive_pct": 50},
+    "sources": [
+      "https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences",
+      "https://www.wsiworld.com/blog/the-good-bad-and-the-ugly-ai-writing-vs.-human-writing"
+    ]
+  },
+  {
+    "recommendation": "Vary sentence rhythm deterministically",
+    "rationale": "Humans naturally vary sentence length; merging/splitting sentences increases natural rhythm and reduces machine-like regularity.",
+    "params": {"merge_prob_standard": 0.25, "merge_prob_aggressive": 0.4, "split_long_sent_thresh": 18},
+    "sources": ["https://ieeexplore.ieee.org/document/10896944"]
+  },
+  {
+    "recommendation": "Limit em-dash frequency",
+    "rationale": "Em-dash overuse is a strong AI fingerprint; best to allow at most 1 per 500 words and replace extras with commas.",
+    "params": {"max_per_words": 500},
+    "sources": ["https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences"]
+  },
+  {
+    "recommendation": "Avoid triadic lists and emoji bullets",
+    "rationale": "AI often emits three-item lists and emoji bullets; merging or reformatting three-item lists and stripping emoji reduces detectability.",
+    "params": {"preferred_list_len_min": 2, "preferred_list_len_max": 5},
+    "sources": ["https://www.wsiworld.com/blog/the-good-bad-and-the-ugly-ai-writing-vs.-human-writing"]
+  },
+  {
+    "recommendation": "Replace banned buzzwords with plain alternatives",
+    "rationale": "Certain marketing buzzwords are overused by AI; deterministic replacement reduces 'AI-scent' while preserving meaning.",
+    "params": {},
+    "sources": ["https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences"]
+  },
+  {
+    "recommendation": "Remove editorial/meta markers deterministically",
+    "rationale": "Editorial notes (Note:, Edited:) are machine-inserted artifacts; remove conservative patterns while preserving substantive content.",
+    "params": {},
+    "sources": ["https://www.wsiworld.com/blog/the-good-bad-and-the-ugly-ai-writing-vs.-human-writing"]
+  },
+  {
+    "recommendation": "Soften LinkedIn-style templates",
+    "rationale": "Formulaic hook→ethos→bullets→conclusion patterns are common in AI outputs; heuristically detect and convert to natural paragraphs.",
+    "params": {"min_bullets_for_soften": 2},
+    "sources": ["https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences"]
+  },
+  {
+    "recommendation": "Insert occasional neutral discourse markers",
+    "rationale": "Short markers (That said, Still,) increase human-like discourse flow when used sparingly (5-10% of paragraph starts).",
+    "params": {"insertion_pct_standard": 8, "insertion_pct_aggressive": 12},
+    "sources": ["https://ieeexplore.ieee.org/document/11022524"]
+  }
+]

@@ -19,14 +19,8 @@ export class GroqProvider implements AIProvider {
       const response = await this.client.chat.completions.create({
         model: this.model,
         messages: [
-          {
-            role: 'system',
-            content: 'You are an expert writing assistant focused on improving text quality, grammar, and tone.',
-          },
-          {
-            role: 'user',
-            content: prompt,
-          },
+          { role: 'system', content: process.env.UNIFIED_SYSTEM_MESSAGE || 'You are an expert writing assistant focused on improving text quality, grammar, and tone.' },
+          { role: 'user', content: prompt },
         ],
         temperature,
         max_tokens: 2000,

@@ -97,6 +97,11 @@ export const App: React.FC = () => {
 
       const toneInfo = TONES[selectedToneIndex];
       const prompt = createRefinementPrompt(state.text, toneInfo.id, toneInfo.instruction);
+      const humanizeLevel = (settings.humanizeLevel as 'low'|'standard'|'aggressive') || 'standard';
+      const debug = Boolean(settings.debug);
+
+      // Providers accept a system role (UNIFIED_SYSTEM_MESSAGE). Do not append
+      // operator meta markers to the prompt; keep prompt clean to avoid leakage.
       const refinedText = await provider.generateCompletion(prompt, 0.4);
       
       setState({ 

@@ -12,6 +12,9 @@ export interface Settings {
   activeProvider: string;
   theme: string;
   providers: { [key: string]: ProviderConfig };
+  // UI / runtime options persisted for the CLI
+  humanizeLevel?: 'low' | 'standard' | 'aggressive';
+  debug?: boolean;
 }
 
 const CONFIG_DIR = resolve(homedir(), '.redactum');
@@ -21,6 +24,8 @@ const DEFAULT_SETTINGS: Settings = {
   activeProvider: 'openai',
   theme: 'opencode',
   providers: {},
+  humanizeLevel: 'standard',
+  debug: false,
 };
 
 export function loadSettings(): Settings {

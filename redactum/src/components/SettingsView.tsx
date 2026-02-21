@@ -17,11 +17,15 @@ type SettingsState =
   | { type: 'active-provider-list' }
   | { type: 'provider-config'; provider: string }
   | { type: 'api-key-input'; provider: string }
-  | { type: 'model-input'; provider: string };
+  | { type: 'model-input'; provider: string }
+  | { type: 'humanize-config' }
+  | { type: 'debug-config' };
 
 const MENU_ITEMS = [
   { id: 'providers', label: 'Configure Providers', description: 'Add or edit API keys' },
   { id: 'active', label: 'Select Active Provider', description: 'Choose which provider to use' },
+  { id: 'humanize', label: 'Humanize Level', description: 'low | standard | aggressive' },
+  { id: 'debug', label: 'Debug Mode', description: 'Include postprocess debug reports' },
 ];
 
 const PROVIDERS = ['openai', 'groq', 'nvidia', 'xai', 'anthropic', 'together', 'openrouter', 'ollama', 'custom'];
@@ -68,12 +72,18 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ theme, onClose, onSe
       } else if (key.downArrow) {
         setMenuIndex(prev => Math.min(MENU_ITEMS.length - 1, prev + 1));
       } else if (key.return) {
-        if (MENU_ITEMS[menuIndex].id === 'providers') {
+        const sel = MENU_ITEMS[menuIndex].id;
+        if (sel === 'providers') {
           setState({ type: 'provider-list' });
           setProviderIndex(0);
-        } else if (MENU_ITEMS[menuIndex].id === 'active') {
+        } else if (sel === 'active') {
           setState({ type: 'active-provider-list' });
           setProviderIndex(Math.max(0, PROVIDERS.indexOf(settings.activeProvider)));
+        } else if (sel === 'humanize') {
+          // Enter humanize level configuration
+          setState({ type: 'humanize-config' });
+        } else if (sel === 'debug') {
+          setState({ type: 'debug-config' });
         }
       }
       return;
@@ -99,8 +109,34 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ theme, onClose, onSe
       return;
     }
 
-    if (state.type === 'provider-config') {
-      const configOptions = ['api-key', 'model', 'back'];
+      if (state.type === 'provider-config') {
+        var configOptions = ['api-key', 'model', 'back'];
+      } else if (state.type === 'humanize-config') {
+      // Allow changing humanize level via arrow keys and Enter
+      if (key.upArrow || key.downArrow) {
+        // cycle through options low -> standard -> aggressive
+        const order = ['low', 'standard', 'aggressive'] as const;
+        const current = (settings.humanizeLevel as 'low'|'standard'|'aggressive') || 'standard';
+        const idx = order.indexOf(current);
+        const next = key.upArrow ? order[(idx - 1 + order.length) % order.length] : order[(idx + 1) % order.length];
+        const newSettings = { ...settings, humanizeLevel: next as 'low'|'standard'|'aggressive' };
+        handleSaveSettings(newSettings);
+        setMessage(`Humanize level set to ${next}`);
+      } else if (key.return || key.escape) {
+        setState({ type: 'menu' });
+      }
+      return;
+    } else if (state.type === 'debug-config') {
+      // Toggle debug mode on return or toggle with arrows
+      if (key.return) {
+        const newSettings = { ...settings, debug: !Boolean(settings.debug) };
+        handleSaveSettings(newSettings);
+        setMessage(`Debug mode ${newSettings.debug ? 'enabled' : 'disabled'}`);
+        setState({ type: 'menu' });
+      } else if (key.escape) {
+        setState({ type: 'menu' });
+      }
+      return;
       if (key.upArrow) {
         setConfigIndex(prev => Math.max(0, prev - 1));
       } else if (key.downArrow) {

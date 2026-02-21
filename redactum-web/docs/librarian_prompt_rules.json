@@ -1,0 +1,62 @@
+[
+  {
+    "rule": "Limit em-dash frequency: max 1 em dash (—) per 500 words",
+    "justification": "AI output often overuses em-dashes; limiting frequency increases human-like punctuation rhythm.",
+    "source": "https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Avoid 'lists of three' as the default; prefer 2-5 items and vary list lengths",
+    "justification": "AI commonly emits triadic lists; varying lengths and merging items reduces patterned signals.",
+    "source": "https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Strip leading emojis or decorative glyphs from list items",
+    "justification": "Emoji-led bullets are a strong AI stylistic hallmark in generated lists.",
+    "source": "https://hastewire.com/blog/human-vs-ai-writing-examples-side-by-side-style-differences",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Ban specific buzzwords: Delve, Elevate, Innovative, Cutting-edge, Practical solutions, Transformative, Leverage, Robust, Seamless (replace with plain, specific alternatives)",
+    "justification": "AI overuses marketing buzzwords; deterministic replacement reduces 'AI-scent' vocabulary.",
+    "source": "internal rules (user-provided) and Hastewire guidance",
+    "stage": "both"
+  },
+  {
+    "rule": "Limit 'Not just X — but Y' parallel structures to 1 per document; rewrite extras to alternative phrasing",
+    "justification": "Parallel 'not just... but' is a recognizable AI pattern; reducing frequency and rewriting extras increases naturalness.",
+    "source": "Hastewire; academic detectors noted predictable syntactic patterns (see IEEE abstracts)",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Ban clarifying lead-ins: 'To clarify', 'In summary', 'In other words' (remove or rewrite)",
+    "justification": "Formulaic clarifiers are often used by models to signal structure; humans rarely pepper short clarifiers without context.",
+    "source": "Hastewire",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Simulate multi-step writing: instruction to 'outline → draft → edit' in prompt; enforce concise editing deterministically in postprocess",
+    "justification": "Model-level instruction encourages multi-pass behavior; deterministic postprocessing enforces the final polished form.",
+    "source": "User requirements; Hastewire recommendations",
+    "stage": "both"
+  },
+  {
+    "rule": "Use conditional phrasing for unverifiable claims (may, often) instead of assertive factual language",
+    "justification": "Reduces false-authority signals and makes statements sound human and cautious.",
+    "source": "Hastewire; IEEE abstracts (paywalled) indicate detectors penalize unwarranted assertions",
+    "stage": "prompt"
+  },
+  {
+    "rule": "Merge exact three-item bullet groups deterministically (e.g., merge last two items) to avoid triadic pattern",
+    "justification": "A safe postprocess transformation that preserves meaning while disrupting a common AI pattern.",
+    "source": "User rule + Hastewire",
+    "stage": "postprocess"
+  },
+  {
+    "rule": "Prefer concrete specifics: numbers, timeframes, short human examples; avoid empty praise",
+    "justification": "Concrete detail improves authenticity and lowers detector scores that look for vague 'polish'.",
+    "source": "Hastewire; WSI blog",
+    "stage": "prompt"
+  }
+]
